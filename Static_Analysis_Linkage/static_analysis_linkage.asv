@@ -38,11 +38,11 @@ Torque = [0 0 Tin];
 
 %Mass of each link 
 
-Mass_AB = 0;
-Mass_BEC = 0;
-Mass_CD = 0;
-Mass_EF = 0;
-Mass_FG = 0;
+Mass_AB = 10;
+Mass_BEC = 10;
+Mass_CD = 10;
+Mass_EF = 10;
+Mass_FG = 10;
 
 %Applied Load 
 
@@ -106,24 +106,11 @@ eqns=[eqn1; eqn2; eqn3; eqn4; eqn5; eqn6; eqn7; eqn8; eqn9; eqn10];
 solution=solve(eqns,[FAx, FAy, FBx, FBy, FCx, FCy, FDx, FDy, FEx, FEy, FFx, FFy, FGx, FGy, Tin]);
 
 % Extracting the results from the solution
-
 FA = double([solution.FAx, solution.FAy, 0]);
-FB = double([solution.FBx, solution.FBy, 0]);
-FC = double([solution.FCx, solution.FCy, 0]);
-FD = double([solution.FDx, solution.FDy, 0]);
-FE = double([solution.FEx, solution.FEy, 0]);
-FF = double([solution.FFx, solution.FFy, 0]);
-FG = double([solution.FGx, solution.FGy, 0]);
-StaticTorque = double(solution.Tin);
-
-%print functions
-
-fprintf('Reaction Forces (N):\n');
-fprintf('FA = [%.4f, %.4f, %.4f]\n', FA);
-fprintf('FB = [%.4f, %.4f, %.4f]\n', FB);
-fprintf('FC = [%.4f, %.4f, %.4f]\n', FC);
-fprintf('FD = [%.4f, %.4f, %.4f]\n', FD);
-fprintf('FE = [%.4f, %.4f, %.4f]\n', FE);
-fprintf('FF = [%.4f, %.4f, %.4f]\n', FF);
-fprintf('FG = [%.4f, %.4f, %.4f]\n', FG);
-fprintf('Static Torque (N·m): %.4f\n', StaticTorque);
+FB = [solution.FBx, solution.FBy, 0];
+FC = [solution.FCx, solution.FCy, 0];
+FD = [solution.FDx, solution.FDy, 0];
+FE = [solution.FEx, solution.FEy, 0];
+FF = [solution.FFx, solution.FFy, 0];
+FG = [solution.FGx, solution.FGy, 0];
+StaticTorque = solution.Tin;
